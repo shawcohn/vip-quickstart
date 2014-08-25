@@ -74,8 +74,12 @@ if ( ! defined( 'WPLANG' ) )
 define('WP_DEBUG', true);
 define('SAVEQUERIES', true);
 
-if ( ! defined( 'JETPACK_DEV_DEBUG' ) )
-    define('JETPACK_DEV_DEBUG', true);
+if ( ! defined( 'JETPACK_DEV_DEBUG' ) ) {
+    if ( isset( $_ENV['VIP_QUICKSTART_ENV' ] ) && 'public' == $_ENV['VIP_QUICKSTART_ENV'] )
+	define('JETPACK_DEV_DEBUG', true);
+    else
+	define('JETPACK_DEV_DEBUG', false);
+}
 
 if ( ! defined( 'MP6_STYLE_GUIDE' ) )
     define('MP6_STYLE_GUIDE', true);
@@ -93,8 +97,12 @@ define('BLOG_ID_CURRENT_SITE', 1);
 if ( ! defined( 'DOMAIN_CURRENT_SITE' ) )
     define('DOMAIN_CURRENT_SITE', $_SERVER['HTTP_HOST']);
 
-if ( ! defined( 'SUBDOMAIN_INSTALL' ) )
-    define('SUBDOMAIN_INSTALL', false);
+if ( ! defined( 'SUBDOMAIN_INSTALL' ) ) {
+    if ( isset( $_ENV['VIP_QUICKSTART_ENV' ] ) && 'public' == $_ENV['VIP_QUICKSTART_ENV'] )
+	define('SUBDOMAIN_INSTALL', true);
+    else
+	define('SUBDOMAIN_INSTALL', false);
+}
 
 if ( ! defined( 'WP_DEFAULT_THEME' ) )
 	define('WP_DEFAULT_THEME', 'pub/twentyfourteen');
